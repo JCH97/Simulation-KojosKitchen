@@ -1,8 +1,12 @@
 import math
-from random import uniform
+from random import random
 from customer import Customer
 
 TOTAL_TIME = 660
+
+
+def uniform(a: int, b: int) -> float:
+    return a + (b - a) * random()
 
 
 def prepare_sushi() -> float:
