@@ -9,7 +9,7 @@ def simulate(total_time_work: int, lambda_value: int, amount_chefs: int, extra_c
 
     arrives_number = amount_customers_now = elapsed_time = 0
     chefs = [0] * amount_chefs
-    service_time = [math.inf] * amount_chefs  # finalization time
+    service_time = [math.inf] * amount_chefs
     attended_by_chef = [0] * amount_chefs
     customers_dict = {}
     pending_customers = []
@@ -48,17 +48,17 @@ def simulate(total_time_work: int, lambda_value: int, amount_chefs: int, extra_c
                 break
 
             # attend customers
-            t_i = min(service_time)
-            elapsed_time = t_i
-            i = service_time.index(t_i)
+            n_out = min(service_time)
+            elapsed_time = n_out
+            i = service_time.index(n_out)
             customer = chefs[i]
-            customers_dict[customer].set_finish(t_i)
+            customers_dict[customer].set_finish(n_out)
             amount_customers_now -= 1
 
             if pending_customers:  # attend first customer in queue
                 customer_id = pending_customers.pop(0)
                 chefs[i] = customer_id
-                customers_dict[customer_id].set_attended(t_i)
+                customers_dict[customer_id].set_attended(n_out)
                 service_time[i] = elapsed_time + attend_customer_time(customers_dict[customer_id])
                 attended_by_chef[i] += 1
             else:  # release worker

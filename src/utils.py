@@ -5,15 +5,15 @@ from customer import Customer
 TOTAL_TIME = 660
 
 
-def prepare_sushi() -> int:
+def prepare_sushi() -> float:
     return uniform(3, 5)
 
 
-def prepare_sandwich() -> int:
+def prepare_sandwich() -> float:
     return uniform(5, 8)
 
 
-def get_arrive_time(lambda_value=10) -> int:
+def get_arrive_time(lambda_value=10) -> float:
     return -(1 / lambda_value) * math.log(uniform(0, 1))
 
 
