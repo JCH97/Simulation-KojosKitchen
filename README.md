@@ -37,7 +37,9 @@ $$
 
 ​	Notemos que la segunda variante para la que se debe resolver el problema es equivalente a la primera, pero con un ligero cambio en los horarios pico; por tanto se puede asegurar que si se conoce la forma de resolver la primera entonces la segunda no ofrece dificultad extra.
 
-​	
+​	A modo de aclaración, se considera como espera por parte de un cliente, si este pasa más de 5 minutos en la cola para ser atendido, es decir, el tiempo en el que el cliente está esperando por un chef libre. En caso de que se quiera calcular todo el tiempo desde la llegada hasta que se va con el producto, es cambiar en el método _run_ de _main.py_ la forma de obtener la variable _out_time_ y en lugar de usar _customer.attended - customer.arrive_ emplear _customer.finish - customer.arrive_. 
+
+​	Para hacer un análisis más detallado del problema, usar el _modo debug_ fijando en _True_ el último parámetro del método _run_. 
 
 #### Modelo de simulación de eventos discretos desarrollado para resolver el problema.
 
@@ -107,7 +109,7 @@ $$
 
   - chefs$_{n+1}$ = 0, se activa el chef extra
 
-- 4to Caso [ $bad_time = False$ ]
+- 4to Caso [ $bad\_time = False$ ]
 
   - chefs$_{n + 1}$ = $\infty$
 
@@ -115,7 +117,9 @@ $$
 
 #### Consideraciones obtenidas a partir de la simulación.
 
-​	Como en el texto no se hacía referencia al parámetro ($\lambda$: usado en la exponencial que define los arribos de los consumidores al negocio) , entonces para realizar una prueba lo más certera posible se realizaron alrededor de 1000 simulaciones para cada valor distinto del parámetro.
+​	Como en el texto no se hacía referencia al parámetro $\lambda$ (usado en la exponencial que define los arribos de los consumidores al negocio) , entonces para realizar una prueba lo más certera posible se realizaron alrededor de 1000 simulaciones para cada valor distinto del parámetro.
+
+
 
 ​	Se obtivieron los siguientes resultados.
 
@@ -155,7 +159,7 @@ Dos chefs:  1.4152418055455356 %
 Tres chefs:  0.8966080130590298 %
 ```
 
-​	El cuadro anterior indica para cada valor de lambda usado y con dos o tres chefs el porciento de los clientes que esperaron más de cinco minutos en ser atendidos.
+​	El cuadro anterior indica para cada valor de lambda usado y con dos o tres chefs, el porciento de los clientes que esperaron más de cinco minutos en ser atendidos.
 
 ​	A nivel de simulación el tiempo que demora un cliente en ser atendido está dado por _customer.attended - customer.arrive_, lo cuál no es difícil notar. Como conclusión se deriva que el servicio de atención es mejor cuando, en los horarios pico, se añade un cliente extra. A medida que lambda se hace más pequeño, como aumenta el valor esperado del tiempo en el arribo de clientes, es más probable que al llegar alguno exista un chef que se encuentre desocupado y por tanto la diferencia entre el porciento cuando se usa 2 chefs y 3 es menor.
 

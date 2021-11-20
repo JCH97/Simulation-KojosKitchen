@@ -67,12 +67,18 @@ def simulate(total_time_work: int, lambda_value: int, amount_chefs: int, extra_c
     return customers_dict
 
 
-def run(simulations: int, lambda_value: int, extra_chef: bool):
+def run(simulations: int, lambda_value: int, extra_chef: bool, debug=False):
     total_out_time, total_customers = 0, 0
 
-    for _ in range(simulations):
+    for i in range(simulations):
         customers = simulate(TOTAL_TIME, lambda_value, 2, extra_chef)
         out_time = [1 if (customer.attended - customer.arrive) > 5 else 0 for customer in customers.values()]
+
+        if debug:
+            print(f"Simulation number {i + 1} of {simulations}")
+            for c in customers.values():
+                print(c)
+            print('\n')
 
         total_out_time += sum(out_time)
         total_customers += len(customers)
@@ -80,11 +86,11 @@ def run(simulations: int, lambda_value: int, extra_chef: bool):
     customers = total_customers / simulations
     out_time = total_out_time / simulations
 
-    return (out_time / customers) * 100
+    return (out_time / customers) * 100 if customers != 0 else 0
 
 
 if __name__ == '__main__':
     for lambda_value in [1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]:
         print(f"------------------Testing with lambda {lambda_value}-------------------------")
-        print(f"Dos chefs: ", run(1000, lambda_value, False), "%")
-        print(f"Tres chefs: ", run(1000, lambda_value, True), "%\n\n")
+        print(f"Dos chefs: ", run(1000, lambda_value, False, False), "%")
+        print(f"Tres chefs: ", run(1000, lambda_value, True, False), "%\n\n")
