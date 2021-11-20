@@ -8,7 +8,7 @@ class Customer:
         self.order_type = 0 if uniform(0, 1) <= 0.5 else 1
 
     def __str__(self):
-        return f"Customer {id}, arrive to kitchen at time {self.arrive} with " \
+        return f"Customer {self.id}, arrive to kitchen at time {self.arrive} with " \
                f"order {self.order_type} and finish in time {self.finish}."
 
     def set_arrive(self, value: float):

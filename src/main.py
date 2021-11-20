@@ -44,7 +44,6 @@ def simulate(total_time_work: int, lambda_value: int, amount_chefs: int, extra_c
                 pending_customers.append(arrives_number)
         else:
             if arrive_time > total_time_work and not amount_customers_now:
-                overtime = max(elapsed_time - total_time_work, 0)
                 break
 
             # attend customers
